@@ -2,18 +2,19 @@
 library(sp)
 library(raster)
 library(ggplot2)
+library(ggspatial)
 #unlink("C:/Users/giris/Dropbox/PC/Documents/R/win-library/4.1/00LOCK-ggspatial", recursive = TRUE)options("install.lock"=FALSE)
 #install.packages("ggplot2")
 
-library(ggspatial)
+
 
   # clean R working environment
   rm(list=ls())
 
-  # set working directory 
+  # set working directory use your own directory 
   setwd('C:/Users/giris/Desktop/R_Project/data_2017')
 
-  # lst all files within the folder (make sure that you only have tiff file inside the folder)
+  # list all files within the folder (make sure that you only have tiff file inside the folder)
   t_list=list.files(getwd(), pattern='.tif$')
 
   # print tiff list
@@ -23,7 +24,7 @@ library(ggspatial)
   snow_stack=stack(t_list[1:46])
 
   # get detail of the stack
-  snow_stack
+  # snow_stack (uncomment here if you want to see snow_stack and delete this instruction msg in brackets)
 
   # get frequency of first layer
   freq(snow_stack[[1]])
@@ -88,7 +89,8 @@ library(ggspatial)
 
   df_SP=na.omit(df_SP)
 
-  #png("Snow_persistency 2017.png")
+  #(uncomment png and dev.off() to get a png image it will be saved in same working directory if you havent specified it)
+  #png("Snow_persistency 2017.png") 
   ggplot()+ ggtitle("Annual Snow Persistency Map of Solukhumbu (2017)")+
   geom_tile(data=df_SP,aes(x = x, y = y,fill =layer), alpha = 0.8)+
   xlab('Longitude')+ylab("Latitude")+
@@ -151,7 +153,7 @@ library(ggspatial)
   #print(paste0('permanent snow cover is ',percent_snow_zone[4]," % of land area in 2017"))
 
 
-  # snow cover area calculation -------------------------------------------------------------
+  # ------------------------------snow cover area calculation -------------------------------------------------------------
 
   #counting the pixels of snow, no snow, and NA zones 
   pixel_count=t(freq(solu_poly_snow,merge=T))
@@ -173,8 +175,8 @@ library(ggspatial)
   #dev.off()
 
 
-  ###### Find the Conversion Factor #################
-  ###########calculate snow cover area in square kilometer
+  ##Find the Conversion Factor #################
+  ##calculate snow cover area in square kilometer
   #according manual,  spatial extent : 500m*500m
   #changing ko sq.km spatial extent:
 
