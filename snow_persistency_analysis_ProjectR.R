@@ -118,7 +118,7 @@ library(ggspatial)
   #make df of sp class to use using ggplot
   df_SP_reclassify=as.data.frame(SP_class,xy=T)
   str(df_SP_reclassify)
-
+  #omit na datas
   df_SP_reclassify=na.omit(df_SP_reclassify)
 
   ## Make reclassified map in the using ggplot2
@@ -184,11 +184,11 @@ library(ggspatial)
 
   SCA_sq_km=snow_pixel*0.25 # sq.kilometre equivalent 
 
-  png('SCA_2017(sq.km).png')
+  #png('SCA_2017(sq.km).png')
   # plot sca_sq_km as a function of date
   plot(MODIS_data_date,SCA_sq_km,type='b',main = "Snow Cover Area (SCA) of Solukhumbu(2017)",xlab='Month',ylab='SCA (Sq.km)')
   grid()
-    dev.off()
+  #dev.off()
 
   # store date and sca in data frame and export
   df_output=data.frame(Date=MODIS_data_date,SCA_percent=SCA_percent,SCA_Sq_km=SCA_sq_km)
